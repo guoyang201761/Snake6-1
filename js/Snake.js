@@ -45,6 +45,61 @@ function Snake() {
 	this.foodList = []; //创建食物数组
 	this.timer = null; //蛇动的定时器，每动一步的时间间隔
 	this.score = 0; //每吃一次所加的分数
+	this.isDead = false;//蛇是否活着标识位
+	this.isEaten = false;//食物是否被吃掉标识位
+	this.isPhone = false;//判断设备是否为移动端  true--移动端  false--PC
+
+
+	
+	 //生成初始化页面，点击该页面，进入游戏
+	 
+	this.init = function() {
+		this.device();//判断设备类型
+		this.ctx.drawImage(startImg, 0, 0, this.width, this.height);
+	}
+	
+	 //游戏开始，绘制背景、蛇、食物,蛇移动
+	 
+	
+	this.start = function(){
+		this.device();//判断设备类型
+		this.score = 0;//积分清零
+		this.paint();
+		this.move();
+	}
+	
+	
+	 // 判断当前设备是否是移动端
+	 
+	this.device = function(){
+		//1-读取BOM对象navigator的userAgent信息
+		var deviceInfo = navigator.userAgent;
+		//2-判断是否为PC端（是否含有Windows字符串）
+		if(deviceInfo.indexOf("Windows") == -1){
+			this.isPhone = true;
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
+			this.width = window.innerWidth;
+			this.height = window.innerHeight;
+			this.stepX = this.width/this.step;
+			this.stepY = this.height/this.step;
+			console.log(this.width+":"+this.height);
+		}
+		
+	}
+	
+	
+	// 绘制背景、蛇、食物
+	 
+	this.paint = function() {
+		//画出背景
+		this.ctx.drawImage(bgImg, 0, 0, this.width, this.height);
+		// 画蛇
+		this.drawSnake();
+		// 随机画出食物
+		this.drawFood();
+	}
+
 
 	//*************画蛇*************//
 	//算法：循环生成一个snakeBodyList数组(默认蛇在中间，蛇头向左)[{x:横坐标,y:纵坐标,img:图片,direct:方向},......]
@@ -143,18 +198,34 @@ function Snake() {
 			//			console.log(ev.key+":"+ev.keyCode);
 			switch(ev.keyCode) {
 				case 37: //向左
+				//禁止蛇头向相反方向移动
+					 if(_this.snakeBodyList[0].direct=='right'){
+					 	break;
+					 }
 					_this.snakeBodyList[0].img = leftImg;
 					_this.snakeBodyList[0].direct = 'left';
 					break;
 				case 38: //向上
+				//禁止蛇头向相反方向移动
+					 if(_this.snakeBodyList[0].direct=='bottom'){
+					 	break;
+					 }
 					_this.snakeBodyList[0].img = topImg;
 					_this.snakeBodyList[0].direct = 'top';
 					break;
 				case 39: //向右
+				//禁止蛇头向相反方向移动
+					 if(_this.snakeBodyList[0].direct=='left'){
+					 	break;
+					 }
 					_this.snakeBodyList[0].img = rightImg;
 					_this.snakeBodyList[0].direct = 'right';
 					break;
 				case 40: //向下
+				//禁止蛇头向相反方向移动
+					 if(_this.snakeBodyList[0].direct=='top'){
+					 	break;
+					 }
 					_this.snakeBodyList[0].img = bottomImg;
 					_this.snakeBodyList[0].direct = 'bottom';
 					break;
