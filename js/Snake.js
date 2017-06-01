@@ -102,6 +102,87 @@ function Snake(){
 	}
 	
 }
+	
+	
+	/*
+	 *蛇动（事件改变蛇移动方向，判断蛇是否死掉，然后判断蛇是否吃了食物，之后蛇移动）
+	 *判断设备如果是pc，响应键盘事件，否则，响应触屏事件
+	 *生成键盘事件处理器this.keyHandler()，和触屏事件处理器this.touchHandler()
+	 */
+	this.keyHandler = function(){//键盘事件处理器
+		//事件处理是异步的，无法传递this对象
+		var _this = this;
+		document.onkeydown = function(ev){
+			var ev = ev||window.event;
+//			console.log(ev.key+":"+ev.keyCode);
+			switch(ev.keyCode){
+				case 37://向左
+					_this.snakeBodyList[0].img = leftImg;
+					_this.snakeBodyList[0].direct = 'left';
+				break;
+				case 38://向上
+					_this.snakeBodyList[0].img = topImg;
+					_this.snakeBodyList[0].direct = 'top';
+				break;
+				case 39://向右
+					_this.snakeBodyList[0].img = rightImg;
+					_this.snakeBodyList[0].direct = 'right';
+				break;
+				case 40://向下
+					_this.snakeBodyList[0].img = bottomImg;
+					_this.snakeBodyList[0].direct = 'bottom';
+				break;
+			}
+		}
+	}
+	
+	this.touchHandler = function(){//触屏事件处理器
+		var _this = this;
+		document.addEventListener("touchstart",function(ev){
+			var ev = ev||window.event;
+//			console.log(ev);
+			var touchX = ev.changedTouches[0].clientX;
+			var touchY = ev.changedTouches[0].clientY;
+			console.log(touchX+":"+touchY);
+			var head = _this.snakeBodyList[0];
+			var headX = head.x*_this.step;//注意蛇头x坐标值与px的转换  乘以_this.step
+			var headY = head.y*_this.step;//注意蛇头x坐标值与px的转换  乘以_this.step
+			if(head.direct == "top" || head.direct == "bottom"){
+				if(touchX < headX){
+					head.direct = "left";
+					head.img = westImg;
+				}else{
+					head.direct = "right";
+					head.img = eastImg;
+				}
+			}else if(head.direct == "left" || head.direct == "right"){
+				if(touchY < headY){
+					head.direct = "top";
+					head.img = northImg;
+				}else{
+					head.direct = "bottom";
+					head.img = southImg;
+				}
+			}
+			
+		})
+		
+	}
+
+	this.move = function() {
+		
+		if(!this.isPhone){
+			this.keyHandler();
+		}else{
+			this.touchHandler();
+		}	
+		//运用定时器，每隔0.2秒移动蛇
+		var _this = this;
+		this.timer = setInterval(function(){
+			//解决蛇身跟随的问题
+			for(var i = _this.snakeBodyList.length-1;i>0;i--){
+				_this.snakeBodyList[i].x = _this.snakeBodyList[i-1].x
+	
 	}
 	
 	
