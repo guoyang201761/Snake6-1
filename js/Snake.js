@@ -69,6 +69,39 @@ function Snake(){
 				snode.y * this.step, this.step, this.step);
 		}
 		}
+	
+	this.drawFood = function(){//画食物
+	//当食物已经存在的时候，画面刷新时，食物在原有位置重绘；
+	if(this.foodList.length > 0){
+		var fnode = this.foodList[0];
+		this.ctx.drawImage(fnode.img,fnode.x * this.step, fnode.y * this.step, this.step, this.step);
+		return;
+	}
+	//如果食物没有（食物没有或者刚开始的时候），生成X,Y随机坐标，判断是否与蛇身重复
+	//如果重复，重绘，调用this.drawFood(),否则，按照随机生成的点push到数组中，绘制图案
+	var foodX = Math.floor(Math.random()*this.stepX);
+	var foodY = Math.floor(Math.random()*this.stepY);
+	var foodFlag = false;
+	//此处判断食物与蛇身是否重复标识位，true=>重复； false=>不重复；
+	for(var i = 0;i < this.snakeBodyList.length; i++){
+		var snode1 = this.snakeBodyList[0];
+		if(foodX == snode1.x && foodY == snode1.y){
+			foodFlag = true;
+		}
+	}
+	if(foodFlag){
+		this.drawFood();//如果重复就重绘
+	}else{
+		this.foodList.push({
+			x: foodX,
+			y: foodY,
+			img: foodImg
+		})//新生成一个食物
+		var fnode = this.foodList[0];
+		this.ctx.drawImage(fnode.img, fnode.x * this.step, fnode.y * this.step, this.step, this.step)
+	}
+	
+}
 	}
 	
 	
