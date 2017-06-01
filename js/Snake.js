@@ -117,7 +117,7 @@ function Snake() {
 		//判断边界
 		if(headX < LEFT_END-1 || headY < NORTH_END-1 || headX > RIGHT_END || headY > SOUTH_END){
 			this.isDead = true;
-			$("#player").prop("src","../music/gameover.mp3"); //播放死亡时的音乐声音
+			$("#snakeDead").prop("src","../music/gameover.mp3"); //播放死亡时的音乐声音
 			return;//精简判断过程
 		}
 		//判断是否撞到自身
@@ -258,5 +258,19 @@ function Snake() {
 				_this.paint(); //重绘游戏画面
 			}
 		}, 200);
+	}
+	
+	
+	 //蛇吃食物（蛇头坐标与食物坐标一致）
+	 
+	this.eat = function(){
+		const HEAD_X = this.snakeBodyList[0].x;//蛇头横坐标x
+		const HEAD_Y = this.snakeBodyList[0].y;//蛇头纵坐标y
+		const FOOD_X = this.foodList[0].x;//食物横坐标x
+		const FOOD_Y = this.foodList[0].y;//食物纵坐标y
+		if(HEAD_X == FOOD_X && HEAD_Y == FOOD_Y){
+			this.isEaten = true;
+			$("#snakeEat").prop("src","../music/eat.mp3"); //播放声音
+		}
 	}
 }
