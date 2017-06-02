@@ -1,35 +1,27 @@
-//**********************设置项目所需参数**********************//
-//蛇头向上
-var topImg = new Image();
-topImg.src = "";
-//蛇头向左
-var leftImg = new Image();
-leftImg.src = "";
-//蛇头向右
-var rightImg = new Image();
-rightImg.src = "";
-//蛇头向下
-var bottomImg = new Image();
-bottomImg.src = "";
-//蛇身图片
-var bodyImg = new Image();
-bodyImg.src = "";
-//食物图片
-var foodImg = new Image();
-foodImg.src = "";
-//背景1图片
-var bgImg1 = new Image();
-bgImg1.src = "";
-//背景2图片
-var bgImg2 = new Image();
-bgImg2.src = "";
-//背景3图片
-var bgImg3 = new Image();
-bgImg3.src = "";
-//游戏开始图片
-var startImg = new Image();
-startImg.src = "";
-//开始图片放在最后加载，这样可以无需判断onload加载
+//ES6 全局变量使用const关键字定义：  只读
+const northImg = new Image();
+northImg.src = "img/north_head.png";
+const southImg = new Image();
+southImg.src = "img/south_head.png";
+const eastImg = new Image();
+eastImg.src = "img/east_head.png";
+const westImg = new Image();
+westImg.src = "img/west_head.png";
+const bodyImg = new Image();
+bodyImg.src = "img/body.png";
+const foodImg = new Image();
+foodImg.src = "img/food1.png";
+const foodImg2 = new Image();
+foodImg2.src ="img/food2.png";
+const foodImg3 = new Image();
+foodImg3.src ="img/food4.png";
+const bgImg = new Image();
+bgImg.src = "img/bg1.png";
+const startImg = new Image();
+startImg.src = "img/init.png";
+//将欢迎界面的图片放在最后，表示加载成功后，其他图片已经加载完毕，无需再进行onload判断
+var speed=500;//游戏速度，用于设置定时器
+var scoreType=1;//分数类型标志位
 
 //**********************创建蛇的函数**********************//
 function Snake() {
