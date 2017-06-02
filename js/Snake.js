@@ -20,7 +20,7 @@ bgImg.src = "img/bg1.png";
 const startImg = new Image();
 startImg.src = "img/init.png";
 //将欢迎界面的图片放在最后，表示加载成功后，其他图片已经加载完毕，无需再进行onload判断
-var speed=500;//游戏速度，用于设置定时器
+var speed;//游戏速度，用于设置定时器
 var scoreType=1;//分数类型标志位
 
 //**********************创建蛇的函数**********************//
