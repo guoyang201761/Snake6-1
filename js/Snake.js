@@ -429,6 +429,7 @@ $(function(){
 
 				$("#Lv").css("display","none");
 				$("#other").css("display","none");
+				$(".author").css("display","none");
 			});
 			
 			//音乐

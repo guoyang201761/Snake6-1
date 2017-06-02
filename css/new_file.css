@@ -532,3 +532,41 @@
 		max-height: 130px;
 	}
 }
+
+/*作者*/
+.author{
+	width: 40%;
+	height: 40px;
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -15%;
+}
+.author h1{
+	font-size: 20px;
+	color: #6785ae;
+	text-align: left;
+}
+.author h1 span{
+	color: #000;
+	font-size: 20px;
+}
+.author h2{
+	font-size: 20px;
+	color: #6785ae;
+	text-align: left;
+}
+.author h2 span{
+	color: #000;
+	font-size: 20px;
+}
+@media only screen and (max-width: 414px) {
+	.author {
+	    width: 68%;
+	    height: 40px;
+	    position: absolute;
+	    bottom: 32px;
+	    left: 50%;
+	    margin-left: -30%;
+	}
+}
