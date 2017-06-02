@@ -337,3 +337,107 @@ function Snake() {
 		}
 	}
 }
+
+$(function(){
+			 
+			//初始化界面
+			var snakegame=new Snake();
+			startImg.onload=function(){
+				snakegame.init();
+			}
+			$("#Lv").click(function(){
+				$(".btns").hide(200);
+				$(".btns2").show(200);
+			});
+			
+			$("#lev1").click(function(){
+				speed=500;
+				$(".btns2").hide(200);
+				$(".btns").show(200);
+			});
+			$("#lev2").click(function(){
+				speed=350;
+				$(".btns2").hide(200);
+				$(".btns").show(200);
+			});
+			$("#lev3").click(function(){
+				speed=200;
+				$(".btns2").hide(200);
+				$(".btns").show(200);
+			});
+			
+			$("#start").click(function(){
+				$("#start").css("display","none");
+				$("#down").css("display","block");
+				$("#user").css("display", "block");
+				$("#sMusic1")[0].play();
+				snakegame.start();
+
+				$("#Lv").css("display","none");
+				$("#other").css("display","none");
+			});
+			
+			//音乐
+			var  isPlay = true;//true 为正常播放，false 为暂停音乐增加标识位
+			$(".music").click(function() {
+
+				if (isPlay) {
+					$(this).css("background-image", "url(img/xmusic.png)");
+					$("#sMusic1")[0].pause();
+					isPlay = false;
+				} else {
+					$(this).css("background-image", "url(img/music.png)");
+					$("#sMusic1")[0].play();
+					isPlay = true;
+			
+					}
+
+	});
+	
+	$(".gameo").click(function() {
+		$(".gameo").css("display", "none");
+		$(".btns").css("display", "block");
+		snakegame.start();
+		
+	});
+			
+			//点击选择样式按钮进行背景选择
+			$("#other").click(function(){
+				$(".bgType").show(200);
+				$(".btns").hide(200);
+			});
+			
+			//选择背景样式进行游戏背景切换
+			$("#bg01").click(function(){
+				bgImg.src="img/bg1.png";
+				$(".bgType").hide(200);
+				$(".btns").show(200);
+				
+			});
+			$("#bg02").click(function(){
+				bgImg.src="img/bg2.png";
+				$(".bgType").hide(200);
+				$(".btns").show(200);
+			});
+			$("#bg03").click(function(){
+				bgImg.src="img/bg3.jpg";
+				$(".bgType").hide(200);
+				$(".btns").show(200);
+			});
+			
+//			直接进入游戏界面
+//			var snakegame=new Snake();
+//			bgImg.onload=function(){
+//				snakegame.start();
+//			}
+    //点击头像div显示积分
+	$("#down").click(function(event) {
+$("#user").slideToggle();
+});
+	
+	//点击底部div时 显示功能div
+	$(".foot").click(function(){
+		$(".prop").slideToggle();
+	});
+	
+	
